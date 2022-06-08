@@ -14,9 +14,9 @@ const routes: Routes = [
   {path: '', component: IndexComponent},
   {path: 'login', component: LoginComponent},
   {path: 'registro', component: RegistroComponent},
-  {path: 'lista', component: ListaProductoComponent, canActivate: [guard], data: {expectedRol: ['admin', 'user']}},
+  {path: 'lista', component: ListaProductoComponent, canActivate: [guard], data: {expectedRol: ['admin', 'user', 'docente']}},
   {path: 'detalle/:id', component: DetalleProductoComponent, canActivate: [guard], data: {expectedRol: ['admin', 'user']}},
-  {path: 'nuevo', component: NuevoProductoComponent, canActivate: [guard], data: {expectedRol: ['admin']}},
+  {path: 'nuevo', component: NuevoProductoComponent, canActivate: [guard], data: {expectedRol: ['admin', 'docente']}},
   {path: 'editar/:id', component: EditarProductoComponent, canActivate: [guard], data: {expectedRol: ['admin']}},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];

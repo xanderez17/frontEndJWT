@@ -14,6 +14,7 @@ export class ListaProductoComponent implements OnInit {
   productos: Producto[] = [];
   roles: string[];
   isAdmin = false;
+  isDocente = false;
 
   constructor(
     private productoService: ProductoService,
@@ -27,6 +28,9 @@ export class ListaProductoComponent implements OnInit {
     this.roles.forEach(rol =>{
       if(rol === 'ROLE_ADMIN'){
         this.isAdmin = true;
+      }
+      if(rol === 'ROLE_DOCENTE'){
+        this.isDocente = true;
       }
     });
   }
