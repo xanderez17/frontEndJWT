@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Producto } from '../models/producto';
-import { ProductoService } from '../service/producto.service';
-import { ToastrService } from 'ngx-toastr';
+import {Component, OnInit} from '@angular/core';
+import {Producto} from '../models/producto';
+import {ProductoService} from '../service/producto.service';
+import {ToastrService} from 'ngx-toastr';
 import {TokenService} from "../service/token.service";
 
 @Component({
@@ -12,7 +12,6 @@ import {TokenService} from "../service/token.service";
 export class ListaProductoComponent implements OnInit {
 
   productos: Producto[] = [];
-  roles: string[];
   isAdmin = false;
   isDocente = false;
 
@@ -20,19 +19,12 @@ export class ListaProductoComponent implements OnInit {
     private productoService: ProductoService,
     private toastr: ToastrService,
     private tokenService: TokenService
-    ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.cargarProductos();
-    this.roles = this.tokenService.getAuthorities();
-    this.roles.forEach(rol =>{
-      if(rol === 'ROLE_ADMIN'){
-        this.isAdmin = true;
-      }
-      if(rol === 'ROLE_DOCENTE'){
-        this.isDocente = true;
-      }
-    });
+    this.isAdmin = this.tokenService.isAdmin();
   }
 
   cargarProductos(): void {
@@ -56,7 +48,7 @@ export class ListaProductoComponent implements OnInit {
       },
       err => {
         this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000,  positionClass: 'toast-top-center',
+          timeOut: 3000, positionClass: 'toast-top-center',
         });
       }
     );
